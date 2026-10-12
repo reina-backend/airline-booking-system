@@ -29,3 +29,32 @@
 - Redis를 활용한 임시 데이터 관리
 - Docker 기반 실행 환경 구성 및 AWS 서버 배포
 - 실제 예약 과정을 테스트하고 개선
+
+
+---
+
+### 🏗 System Architecture
+
+```mermaid
+flowchart TD
+    U[사용자 브라우저]
+    N[Nginx Reverse Proxy]
+    S[Spring Boot Application]
+    DB[(MySQL Database)]
+    R[(Redis Cache)]
+
+    U -->|HTTP :80| N
+    N -->|Proxy :8080| S
+    S -->|JPA / Hibernate| DB
+    S -->|Redis Connection| R
+```
+
+**Architecture Overview**
+
+- **Nginx**: 외부 HTTP 요청을 Spring Boot 애플리케이션으로 전달
+- **Spring Boot**: 예약, 결제, 발권 등 비즈니스 로직 처리
+- **MySQL**: 예약 및 항공권 등 영속 데이터 저장
+- **Redis**: 임시 데이터 저장 및 캐싱
+- **Docker Compose**: 애플리케이션, MySQL, Redis 컨테이너 관리
+- **AWS EC2**: 애플리케이션 배포 및 실행 환경
+

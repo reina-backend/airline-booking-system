@@ -79,3 +79,42 @@ flowchart TB
 
 ![Reservation Flight ERD](reservation-flight-erd.png)
 
+
+
+---
+
+### 👤 Use Case Diagram
+
+비회원은 회원가입, 로그인 및 항공편 검색 기능을 이용할 수 있습니다.
+항공편 예약과 결제, 전자항공권 조회 등은 로그인한 회원에게 제공됩니다.
+
+```mermaid
+flowchart LR
+    G["👤 비회원"]
+    M["👤 로그인 회원"]
+
+    subgraph SYS["Airline Booking System"]
+        SIGNUP(["회원가입"])
+        LOGIN(["로그인"])
+        SEARCH(["항공편 검색"])
+        SELECT(["항공편 선택"])
+        PASSENGER(["승객 정보 입력"])
+        SERVICE(["좌석 / 수하물 / 기내식 선택"])
+        PAYMENT(["결제"])
+        TICKET(["전자항공권 확인"])
+        MY(["예약 조회"])
+    end
+
+    G --- SIGNUP
+    G --- LOGIN
+    G --- SEARCH
+
+    M --- SEARCH
+    M --- SELECT
+    M --- PASSENGER
+    M --- SERVICE
+    M --- PAYMENT
+    M --- TICKET
+    M --- MY
+```
+

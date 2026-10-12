@@ -67,3 +67,15 @@ flowchart TB
 - **Docker Compose**: 애플리케이션, MySQL, Redis 컨테이너 관리
 - **AWS EC2**: 애플리케이션 배포 및 실행 환경
 
+
+
+---
+
+### 🗂 Database ERD
+
+#### Reservation Flight Domain
+
+예약 항공편과 운항 일정, 운임 및 상태 변경 이력의 데이터 관계를 나타냅니다.
+
+![Reservation Flight ERD](reservation-flight-erd.png)
+

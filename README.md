@@ -33,21 +33,30 @@
 
 ---
 
+
 ### 🏗 System Architecture
 
 ```mermaid
-flowchart TD
-    U[사용자 브라우저]
-    N[Nginx Reverse Proxy]
-    S[Spring Boot Application]
-    DB[(MySQL Database)]
-    R[(Redis Cache)]
+flowchart TB
+    U["사용자 브라우저"]
 
-    U -->|HTTP :80| N
-    N -->|Proxy :8080| S
-    S -->|JPA / Hibernate| DB
-    S -->|Redis Connection| R
+    subgraph EC2["AWS EC2 (Ubuntu)"]
+        N["Nginx Reverse Proxy :80"]
+
+        subgraph DOCKER["Docker Compose"]
+            APP["Spring Boot Application :8080"]
+            DB[("MySQL")]
+            REDIS[("Redis")]
+        end
+
+        N -->|"127.0.0.1:8080"| APP
+        APP -->|"JPA / Hibernate"| DB
+        APP -->|"Redis Connection"| REDIS
+    end
+
+    U -->|"HTTP"| N
 ```
+
 
 **Architecture Overview**
 
